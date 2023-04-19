@@ -17,6 +17,7 @@ for i in card_suit:
 
 
 
+
 player_1_hand=[]
 player_2_hand=[]
 #this is where it will deal the cards to the players
@@ -66,6 +67,8 @@ turn=1
 player_1_score=0
 player_2_score=0
 
+#keeps track of amount of cards in players hand
+amount_of_cards_in_hand_2=0
 #shuffle deck
 for i in range(8):
     random.shuffle(card_list)
@@ -93,6 +96,8 @@ while player_1_hand or player_2_hand:
     card_selection = input('what number do you want to ask for  ')     
 
     #while the card_selection is a invalid input it will ask the user again
+    #this is used for a better user experience 
+
     while card_selection not in valid_inputs:
       print('sorry but you not alllowed to put that try again')
       print('')
@@ -100,10 +105,19 @@ while player_1_hand or player_2_hand:
       print(' ')
       if card_selection in valid_inputs:
         break
-    print('valid input')
-    exit()
-  
+    #this will become a function i think for now not yet.
+    #this will check the other players hand to see if they have it or not
+    for items in player_2_hand:
+      amount_of_cards_in_hand_2+=1
+      for i in range (1,amount_of_cards_in_hand_2):
+        if player_2_hand[i][1] == card_selection:
+          break
+
   #this is for player 2 hand 
-  
   elif(turn % 2==0):
     print('its player 2\'s turn') 
+
+
+#reference 
+#how to print a list item witihin a list 
+#print(card_list[][])
