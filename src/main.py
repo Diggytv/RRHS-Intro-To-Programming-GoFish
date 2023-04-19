@@ -1,6 +1,11 @@
 import random
 from time import sleep
 
+#this will be a list of valid inputs that the user can do that will run
+#the next part of the code
+valid_inputs=['ace','2','3','4','5','6','7','8','9','10','jack','queen','king']
+
+
 # sets up the win condition
 #cards in the decks and players hands
 card_list=[]
@@ -28,7 +33,7 @@ def check_for_card(card_selection):
   lst=[]
   if turn%2==1 :
     for letter in player_2_hand:
-      lst.appened(letter)
+      lst.append(letter)
       print(lst)
   elif turn%2==0:
     print('Dog')
@@ -77,9 +82,28 @@ print('here are your cards '+ player_name)
 print(player_1_hand)
 sleep(2)
 print('lets start, You go first')
+#taking turn system is below uses a while stament to keep it in hear till player one
+# hand and player 2 had are empty.
 while player_1_hand or player_2_hand:
-    if(turn % 2 == 1):
-        print('its player 1 turn')
-        card_selection = input('what number do you want to ask for  ')     
-    if card_selection == 'ace' or card_selection == '2' or card_selection=='3' or card_selection=='4' or card_selection=='5' or card_selection=='6' or card_selection=='7' or card_selection=='8' or card_selection=='9' or card_selection=='10' or card_selection=='jack' or card_selection=='queen' or card_selection=='king':
-         check_for_card(card_selection)   
+  
+  #this is for player 1 turn 
+  
+  if(turn % 2 == 1):
+    print('its player 1\'s turn')
+    card_selection = input('what number do you want to ask for  ')     
+
+    #while the card_selection is a invalid input it will ask the user again
+    while card_selection not in valid_inputs:
+      print('sorry but you not alllowed to put that try again')
+      print('')
+      card_selection = input('what number do you want to ask for  ')
+      print(' ')
+      if card_selection in valid_inputs:
+        break
+    print('valid input')
+    exit()
+  
+  #this is for player 2 hand 
+  
+  elif(turn % 2==0):
+    print('its player 2\'s turn') 
