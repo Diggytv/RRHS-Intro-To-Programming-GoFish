@@ -6,6 +6,9 @@ from time import sleep
 valid_inputs=['ace','2','3','4','5','6','7','8','9','10','jack','queen','king']
 
 
+#for the card selection output 
+
+
 # sets up the win condition
 #cards in the decks and players hands
 card_list=[]
@@ -15,27 +18,45 @@ for i in card_suit:
   for n in card_number:
     card_list.append([i,n])
 
+#keep track of turns
+turn=1
 
+#keeps track of player points
+player_1_score=0
+player_2_score=0
 
+output=' '
 
 player_1_hand=[]
 player_2_hand=[]
 #this is where it will deal the cards to the players
 def deal_cards():
-    for i in range(0,14,2):
-        player_1_hand.append(card_list[i-1])
-        player_2_hand.append(card_list[i])
+  for i in range(0,14,2):
+    player_1_hand.append(card_list[i-1])
+    player_2_hand.append(card_list[i])
 
-#this will run the choice of the player and see if the player 2 list contains that.
-def check_for_card(card_selection):
+#this will run the choice of the player and see if the other player list contains that.
+amount_of_cards_in_hand_2=0
+def check_for_card(output):
   global turn
-  global player_1_hand
-  global player_2_hand
+  global amount_of_cards_in_hand_2
   lst=[]
-  if turn%2==1 :
+  if (turn%2==1) :
     for letter in player_2_hand:
       lst.append(letter)
       print(lst)
+    for items in player_2_hand:
+      amount_of_cards_in_hand_2+=1
+      for i in range (1,amount_of_cards_in_hand_2):
+        if player_2_hand[i][1] == card_selection:
+          output='looks like you guessed right'
+          turn+=1
+          return output
+          
+        else:
+          output='sorry go fish'
+          return output
+          
   elif turn%2==0:
     print('Dog')
   
@@ -57,21 +78,11 @@ print(' ')
 sleep(2)
 print('lets start ')
 
-
-#varibles 
-
-#keep track of turns
-turn=1
-
-#keeps track of player points
-player_1_score=0
-player_2_score=0
-
 #keeps track of amount of cards in players hand
-amount_of_cards_in_hand_2=0
+
 #shuffle deck
 for i in range(8):
-    random.shuffle(card_list)
+  random.shuffle(card_list)
 
 print(' ')
 sleep(2)
@@ -107,17 +118,14 @@ while player_1_hand or player_2_hand:
         break
     #this will become a function i think for now not yet.
     #this will check the other players hand to see if they have it or not
-    for items in player_2_hand:
-      amount_of_cards_in_hand_2+=1
-      for i in range (1,amount_of_cards_in_hand_2):
-        if player_2_hand[i][1] == card_selection:
-          break
+    check_for_card(output)
+  print(check_for_card(output))
+
+
 
   #this is for player 2 hand 
-  elif(turn % 2==0):
-    print('its player 2\'s turn') 
+  if(turn % 2==0):
+    print('its player 2\'s turn')
+    break
 
 
-#reference 
-#how to print a list item witihin a list 
-#print(card_list[][])
