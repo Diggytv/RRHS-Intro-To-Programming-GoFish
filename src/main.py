@@ -37,9 +37,11 @@ def deal_cards():
 
 #this will run the choice of the player and see if the other player list contains that.
 amount_of_cards_in_hand_2=0
+amount_of_cards_in_hand_1=0
 def check_for_card(output):
   global turn
   global amount_of_cards_in_hand_2
+  global amount_of_cards_in_hand_1
   lst=[]
   if (turn%2==1) :
     for letter in player_2_hand:
@@ -50,15 +52,27 @@ def check_for_card(output):
       for i in range (1,amount_of_cards_in_hand_2):
         if player_2_hand[i][1] == card_selection:
           output='looks like you guessed right'
-          turn+=1
           return output
           
-        else:
+        elif player_2_hand[i][1] != card_selection:
           output='sorry go fish'
           return output
-          
+
+#same line of code for player one but now for player 2         
   elif turn%2==0:
-    print('Dog')
+    for letter in player_1_hand:
+      lst.append(letter)
+      #print(lst)
+    for items in player_1_hand:
+      amount_of_cards_in_hand_1+=1
+      for i in range (1,amount_of_cards_in_hand_1):
+        if player_1_hand[i][1] == card_selection:
+          output='looks like you guessed right'
+          return output
+          
+        if player_1_hand[i][1] != card_selection:
+          output='sorry go fish'
+          return output
   
 
 #keep track of player name
@@ -120,7 +134,10 @@ while player_1_hand or player_2_hand:
     #this will become a function i think for now not yet.
     #this will check the other players hand to see if they have it or not
     check_for_card(output)
+  sleep(2)
   print(check_for_card(output))
+  #allows for a turn change 
+  turn+=1
   
 
 
@@ -129,5 +146,20 @@ while player_1_hand or player_2_hand:
   if(turn % 2==0):
     print('its player 2\'s turn')
     
+    card_selection = input('what number do you want to ask for  ')     
 
+    #while the card_selection is a invalid input it will ask the user again
+    #this is used for a better user experience 
 
+    while card_selection not in valid_inputs:
+      print('sorry but you not alllowed to put that try again')
+      print('')
+      card_selection = input('what number do you want to ask for  ')
+      print(' ')
+      if card_selection in valid_inputs:
+        break
+    check_for_card(output)
+  sleep(2)
+  print(check_for_card(output))
+  #allows for a turn change
+  turn+=1
