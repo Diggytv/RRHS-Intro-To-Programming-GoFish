@@ -44,7 +44,7 @@ def check_for_card(output):
   if (turn%2==1) :
     for letter in player_2_hand:
       lst.append(letter)
-      print(lst)
+      #print(lst)
     for items in player_2_hand:
       amount_of_cards_in_hand_2+=1
       for i in range (1,amount_of_cards_in_hand_2):
@@ -93,6 +93,7 @@ deal_cards()
 print(' ')
 sleep(2)
 print('here are your cards '+ player_name)
+print('')
 print(player_1_hand)
 sleep(2)
 print('lets start, You go first')
@@ -120,12 +121,13 @@ while player_1_hand or player_2_hand:
     #this will check the other players hand to see if they have it or not
     check_for_card(output)
   print(check_for_card(output))
+  
 
 
 
   #this is for player 2 hand 
   if(turn % 2==0):
     print('its player 2\'s turn')
-    break
+    
 
 
